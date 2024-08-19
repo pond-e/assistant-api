@@ -1,3 +1,7 @@
 /20230217_AIの進化と日本の戦略_松尾研.pdf
 /__pycache__
 /python-env
+*.csv
+*.md
+*.pdf
+.env
