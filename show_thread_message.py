@@ -31,12 +31,12 @@ def show_thread_message(thread_id: str, assistant_id: str) -> str:
     # Write message_content.value to output.md
     with open(OUTPUT_FILENAME, 'w', encoding='utf-8') as file:
         file.write(message_content.value)
-        file.write("\n".join(citations))
+        file.write("\n"+"\n".join(citations))
 
     return message_content.value+"\n"+"\n".join(citations)
 
 
 if __name__ == "__main__":
-    thread_id = "thread_a4jVO5Tc5npSWlE3151IIN5I"
+    thread_id = "thread_Um9FyWbJ9E1Hqje4Ja6nsUaY"
     assistant_id = "asst_QIukNizMCuawDmX3RQAugIfs"
     show_thread_message(thread_id, assistant_id)
