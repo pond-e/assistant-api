@@ -12,18 +12,32 @@ def create_thread(input_message: str, file_id: str) -> str:
     client = OpenAI()
     
     # Create a thread and attach the file to the message
-    thread = client.beta.threads.create(
-    messages=[
-        {
-        "role": "user",
-        "content": input_message,
-        # Attach the new file to the message.
-        "attachments": [
-            { "file_id": file_id, "tools": [{"type": "file_search"}, {"type": "code_interpreter"}] }
-        ],
-        }
-    ]
-    )
+    if file_id is not None:
+        thread = client.beta.threads.create(
+        messages=[
+            {
+            "role": "user",
+            "content": input_message,
+            # Attach the new file to the message.
+            "attachments": [
+                { "file_id": file_id, "tools": [{"type": "file_search"}, {"type": "code_interpreter"}] }
+            ],
+            }
+        ]
+        )
+    else:
+        thread = client.beta.threads.create(
+        messages=[
+            {
+            "role": "user",
+            "content": input_message,
+            # Attach the new file to the message.
+            "attachments": [
+                { "tools": [{"type": "code_interpreter"}] }
+            ],
+            }
+        ]
+        )
     
     # The thread now has a vector store with that file in its tool resources.
     print("thread.tool_resources.file_search", thread.tool_resources.file_search)
