@@ -40,7 +40,7 @@ def create_thread(input_message: str, file_id: str) -> str:
         )
     
     # The thread now has a vector store with that file in its tool resources.
-    print("thread.tool_resources.file_search", thread.tool_resources.file_search)
+    print("thread.tool_resources.file_search:", thread.tool_resources.file_search)
 
     # Write file_id and assistant_id to a CSV file
     with open(CSV_FILENAME, mode='w', newline='') as file:
