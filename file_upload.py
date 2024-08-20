@@ -5,23 +5,24 @@ load_dotenv()
 os.environ["OPENAI_API_KEY"]
 
 from openai import OpenAI
-client = OpenAI()
-
-pdf_file = "clustream.pdf"
-
-# Fileのアップロード
-uploaded_file = client.files.create(
-    file=open(pdf_file, "rb"),
-    purpose="assistants",
-)
-file_id = uploaded_file.id
-print("file_id:", file_id)
-
-# Write file_id and assistant_id to a CSV file
 import csv
+CSV_FILENAME = "file_info.csv"
 
-csv_filename = "file_info.csv"
+def file_upload(pdf_file: str) -> str:
+    client = OpenAI()
+    # Fileのアップロード
+    uploaded_file = client.files.create(
+        file=open(pdf_file, "rb"),
+        purpose="assistants",
+    )
+    file_id = uploaded_file.id
 
-with open(csv_filename, mode='w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow([pdf_file, file_id])
+    # output csv
+    with open(CSV_FILENAME, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([pdf_file, file_id])
+
+    return file_id
+
+if __name__ == "__main__":
+    file_upload("attention_is_all_you_need.pdf")
