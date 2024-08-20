@@ -33,7 +33,7 @@ def show_thread_message(thread_id: str, assistant_id: str) -> str:
         file.write(message_content.value)
         file.write("\n".join(citations))
 
-    return message_content.value
+    return message_content.value+"\n"+"\n".join(citations)
 
 
 if __name__ == "__main__":
